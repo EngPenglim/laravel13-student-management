@@ -8,15 +8,15 @@
     <div class="header-gradient-card mb-4">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
             <div class="d-flex align-items-center gap-3">
-                <div class="bg-white bg-opacity-25 rounded-circle p-2 px-3">
-                    <i class="bi bi-tags fs-3 text-white"></i>
+                <div class="bg-white bg-opacity-20 rounded-circle p-2 px-3 shadow-sm border border-white border-opacity-25">
+                    <i class="bi bi-tags-fill fs-3 text-warning"></i>
                 </div>
                 <div>
-                    <h2 class="fw-bold mb-0 text-white">Book Categories</h2>
-                    <p class="mb-0 text-white-50 small">Manage library genres, sections & shelf locations</p>
+                    <h2 class="fw-bold mb-0 text-white brand-font">Book Categories & Shelves</h2>
+                    <p class="mb-0 text-white-50 small">Manage library genres, floor stacks & shelf locations</p>
                 </div>
             </div>
-            <button class="btn btn-light rounded-pill px-4 fw-semibold text-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#createCatModal">
+            <button class="btn btn-warning rounded-pill px-4 fw-bold text-dark shadow-sm" data-bs-toggle="modal" data-bs-target="#createCatModal">
                 <i class="bi bi-plus-circle me-1"></i> Add Category
             </button>
         </div>
@@ -31,7 +31,7 @@
                         <th style="width: 80px;">Cat ID</th>
                         <th>Category Name</th>
                         <th>Shelf Location</th>
-                        <th>Floor No</th>
+                        <th>Floor Location</th>
                         <th>Cataloged Books</th>
                         <th class="text-center" style="width: 140px;">Actions</th>
                     </tr>
@@ -39,18 +39,22 @@
                 <tbody>
                     @forelse($categories as $cat)
                         <tr>
-                            <td class="fw-bold text-secondary">#{{ $cat->category_id }}</td>
+                            <td class="fw-bold text-success font-monospace">#{{ str_pad($cat->category_id, 2, '0', STR_PAD_LEFT) }}</td>
                             <td>
                                 <span class="category-badge fs-6">
-                                    <i class="bi bi-tag"></i>
+                                    <i class="bi bi-tag-fill text-success"></i>
                                     {{ $cat->category_name }}
                                 </span>
                             </td>
-                            <td class="text-secondary">{{ $cat->shelf_location ?: 'N/A' }}</td>
-                            <td class="text-secondary">Floor {{ $cat->floor_no }}</td>
+                            <td class="text-secondary fw-semibold">
+                                <i class="bi bi-geo-alt me-1 text-muted"></i>{{ $cat->shelf_location ?: 'N/A' }}
+                            </td>
+                            <td class="text-secondary">
+                                <span class="badge bg-light text-dark border">Floor {{ $cat->floor_no }}</span>
+                            </td>
                             <td>
-                                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-1">
-                                    <i class="bi bi-journal-bookmark me-1"></i> {{ $cat->books_count }} Books
+                                <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1">
+                                    <i class="bi bi-book me-1"></i> {{ $cat->books_count }} Books
                                 </span>
                             </td>
                             <td class="text-center">
@@ -87,7 +91,7 @@
                                                 @method('PUT')
                                                 <div class="modal-header border-0 pb-0">
                                                     <h5 class="modal-title fw-bold text-dark">
-                                                        <i class="bi bi-pencil-square text-primary me-1"></i> Edit Category
+                                                        <i class="bi bi-pencil-square text-success me-1"></i> Edit Category
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
@@ -166,7 +170,7 @@
                 @csrf
                 <div class="modal-header border-0 pb-0">
                     <h5 class="modal-title fw-bold text-dark">
-                        <i class="bi bi-plus-circle-fill text-primary me-1"></i> Add New Category
+                        <i class="bi bi-plus-circle-fill text-success me-1"></i> Add New Category
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>

@@ -4,23 +4,23 @@
 
 @section('content')
 <div class="container py-2">
-    <!-- Header Banner with Statistics (Slide 7 Style) -->
+    <!-- Emerald & Gold Header Banner with Statistics (Distinct Library Style) -->
     <div class="header-gradient-card mb-4">
         <div class="row align-items-center g-4">
             <!-- Title & Subtitle -->
             <div class="col-lg-6 text-center text-lg-start">
                 <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3 mb-2">
-                    <div class="bg-white bg-opacity-25 rounded-circle p-2 px-3">
-                        <i class="bi bi-book-half fs-3 text-white"></i>
+                    <div class="bg-white bg-opacity-20 rounded-circle p-2 px-3 shadow-sm border border-white border-opacity-25">
+                        <i class="bi bi-book-half fs-3 text-warning"></i>
                     </div>
                     <div>
-                        <h2 class="fw-bold mb-0 text-white">Library Book Directory</h2>
-                        <p class="mb-0 text-white-50 small">Browse, search and manage all cataloged books</p>
+                        <h2 class="fw-bold mb-0 text-white brand-font">Library Catalog</h2>
+                        <p class="mb-0 text-white-50 small">Browse, search and manage cataloged books & publications</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 3 Glass Stats Cards -->
+            <!-- 3 Glass Stats Cards with Gold Accents -->
             <div class="col-lg-6">
                 <div class="row g-2 justify-content-center justify-content-lg-end">
                     <!-- Total Books -->
@@ -56,7 +56,7 @@
             <!-- Search bar -->
             <div class="mb-3">
                 <div class="input-group input-group-lg shadow-sm rounded-3 overflow-hidden">
-                    <span class="input-group-text bg-white border-end-0 text-muted ps-3">
+                    <span class="input-group-text bg-white border-end-0 text-success ps-3">
                         <i class="bi bi-search"></i>
                     </span>
                     <input 
@@ -64,14 +64,16 @@
                         class="form-control border-start-0 ps-2" 
                         name="search" 
                         value="{{ $search }}" 
-                        placeholder="Search books by title, author, ISBN, or category..."
+                        placeholder="Search books by title, author, ISBN code, or category..."
                     >
                     @if(!empty($search) || !empty($categoryId) || !empty($status) || ($sort !== 'newest'))
                         <a href="{{ route('books.index') }}" class="btn btn-outline-secondary d-flex align-items-center" title="Clear Filters">
                             <i class="bi bi-x-circle me-1"></i> Clear
                         </a>
                     @endif
-                    <button class="btn btn-primary px-4 fw-semibold" type="submit">Search</button>
+                    <button class="btn btn-primary px-4 fw-bold" type="submit">
+                        <i class="bi bi-filter me-1"></i> Filter Catalog
+                    </button>
                 </div>
             </div>
 
@@ -80,11 +82,11 @@
                 <!-- Category Filter -->
                 <div class="col-md-4">
                     <div class="input-group">
-                        <span class="input-group-text bg-light text-primary border-end-0">
-                            <i class="bi bi-funnel"></i>
+                        <span class="input-group-text bg-light text-success border-end-0">
+                            <i class="bi bi-tags"></i>
                         </span>
                         <select class="form-select bg-light border-start-0" name="category_id" onchange="document.getElementById('filterForm').submit()">
-                            <option value="all" {{ empty($categoryId) || $categoryId === 'all' ? 'selected' : '' }}>All Categories</option>
+                            <option value="all" {{ empty($categoryId) || $categoryId === 'all' ? 'selected' : '' }}>All Book Categories</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->category_id }}" {{ $categoryId == $cat->category_id ? 'selected' : '' }}>
                                     {{ $cat->category_name }}
@@ -97,14 +99,14 @@
                 <!-- Sort Filter -->
                 <div class="col-md-4">
                     <div class="input-group">
-                        <span class="input-group-text bg-light text-primary border-end-0">
+                        <span class="input-group-text bg-light text-success border-end-0">
                             <i class="bi bi-arrow-down-up"></i>
                         </span>
                         <select class="form-select bg-light border-start-0" name="sort" onchange="document.getElementById('filterForm').submit()">
-                            <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>Newest First</option>
-                            <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>Oldest First</option>
-                            <option value="title_asc" {{ $sort === 'title_asc' ? 'selected' : '' }}>Title A-Z</option>
-                            <option value="title_desc" {{ $sort === 'title_desc' ? 'selected' : '' }}>Title Z-A</option>
+                            <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>Newest In Catalog</option>
+                            <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>Oldest In Catalog</option>
+                            <option value="title_asc" {{ $sort === 'title_asc' ? 'selected' : '' }}>Title (A - Z)</option>
+                            <option value="title_desc" {{ $sort === 'title_desc' ? 'selected' : '' }}>Title (Z - A)</option>
                         </select>
                     </div>
                 </div>
@@ -112,13 +114,13 @@
                 <!-- Status Filter -->
                 <div class="col-md-4">
                     <div class="input-group">
-                        <span class="input-group-text bg-light text-primary border-end-0">
+                        <span class="input-group-text bg-light text-success border-end-0">
                             <i class="bi bi-bookmark-check"></i>
                         </span>
                         <select class="form-select bg-light border-start-0" name="status" onchange="document.getElementById('filterForm').submit()">
-                            <option value="all" {{ empty($status) || $status === 'all' ? 'selected' : '' }}>All Statuses</option>
-                            <option value="Available" {{ $status === 'Available' ? 'selected' : '' }}>Available</option>
-                            <option value="Borrowed" {{ $status === 'Borrowed' ? 'selected' : '' }}>Borrowed</option>
+                            <option value="all" {{ empty($status) || $status === 'all' ? 'selected' : '' }}>All Loan Statuses</option>
+                            <option value="Available" {{ $status === 'Available' ? 'selected' : '' }}>Available (In Stock)</option>
+                            <option value="Borrowed" {{ $status === 'Borrowed' ? 'selected' : '' }}>Borrowed (On Loan)</option>
                             <option value="Reserved" {{ $status === 'Reserved' ? 'selected' : '' }}>Reserved</option>
                         </select>
                     </div>
@@ -132,10 +134,10 @@
                 <thead class="table-light text-secondary small text-uppercase">
                     <tr>
                         <th style="width: 50px;">ID</th>
-                        <th>Book & Author</th>
+                        <th>Book Title & Author</th>
                         <th>ISBN & Copies</th>
                         <th>Published Date</th>
-                        <th>Category</th>
+                        <th>Shelf & Category</th>
                         <th class="text-center" style="width: 140px;">Actions</th>
                     </tr>
                 </thead>
@@ -143,25 +145,26 @@
                     @forelse($books as $book)
                         <tr>
                             <!-- ID -->
-                            <td class="fw-bold text-secondary">#{{ $book->book_id }}</td>
+                            <td class="fw-bold text-success font-monospace">#{{ str_pad($book->book_id, 3, '0', STR_PAD_LEFT) }}</td>
 
                             <!-- Book Title & Author -->
                             <td>
-                                <div class="fw-bold text-dark">{{ $book->title }}</div>
-                                <div class="small text-muted"><i class="bi bi-pen me-1"></i>{{ $book->author }}</div>
+                                <div class="fw-bold text-dark fs-6">{{ $book->title }}</div>
+                                <div class="small text-muted"><i class="bi bi-pen me-1 text-success"></i>{{ $book->author }}</div>
                             </td>
 
                             <!-- ISBN & Copies -->
                             <td>
-                                <div class="d-flex align-items-center gap-1 text-primary small">
-                                    <i class="bi bi-upc"></i>
-                                    <span>{{ $book->isbn ?: 'N/A' }}</span>
+                                <div class="d-flex align-items-center gap-1 font-monospace small text-secondary">
+                                    <i class="bi bi-upc-scan text-muted"></i>
+                                    <span>{{ $book->isbn ?: 'No ISBN' }}</span>
                                 </div>
-                                <div class="d-flex align-items-center gap-1 small text-muted">
-                                    <i class="bi bi-stack"></i>
-                                    <span>{{ $book->copies }} {{ Str::plural('copy', $book->copies) }}</span>
-                                    <span class="badge ms-1 {{ $book->status === 'Available' ? 'bg-success-subtle text-success' : ($book->status === 'Borrowed' ? 'bg-warning-subtle text-warning' : 'bg-info-subtle text-info') }}">
-                                        {{ $book->status }}
+                                <div class="d-flex align-items-center gap-1 small mt-1">
+                                    <span class="badge {{ $book->status === 'Available' ? 'status-badge-available' : ($book->status === 'Borrowed' ? 'status-badge-borrowed' : 'status-badge-reserved') }} px-2 py-1 rounded-pill">
+                                        <i class="bi bi-circle-fill me-1" style="font-size: 0.45rem;"></i>{{ $book->status }}
+                                    </span>
+                                    <span class="badge bg-light text-secondary border ms-1">
+                                        <i class="bi bi-stack me-1"></i>{{ $book->copies }} {{ Str::plural('copy', $book->copies) }}
                                     </span>
                                 </div>
                             </td>
@@ -169,21 +172,24 @@
                             <!-- Publication Date -->
                             <td>
                                 <div class="d-flex align-items-center gap-1 small text-dark">
-                                    <i class="bi bi-calendar-event text-primary"></i>
+                                    <i class="bi bi-calendar-event text-success"></i>
                                     <span>{{ $book->published_date ? $book->published_date->format('M d, Y') : 'N/A' }}</span>
                                 </div>
                                 <div class="d-flex align-items-center gap-1 small text-muted">
-                                    <i class="bi bi-clock-history text-secondary"></i>
+                                    <i class="bi bi-hourglass-split text-secondary"></i>
                                     <span>{{ $book->published_age }}</span>
                                 </div>
                             </td>
 
-                            <!-- Category -->
+                            <!-- Category & Shelf -->
                             <td>
-                                <span class="category-badge">
-                                    <i class="bi bi-tag"></i>
+                                <span class="category-badge mb-1">
+                                    <i class="bi bi-tag-fill"></i>
                                     {{ $book->category->category_name ?? 'Unassigned' }}
                                 </span>
+                                <div class="small text-muted">
+                                    <i class="bi bi-geo-alt me-1"></i>{{ $book->category->shelf_location ?? 'Main Stacks' }}
+                                </div>
                             </td>
 
                             <!-- Actions -->
@@ -217,12 +223,12 @@
                                         <div class="modal-content rounded-4 border-0 shadow">
                                             <div class="modal-header border-0 pb-0">
                                                 <h5 class="modal-title fw-bold text-danger">
-                                                    <i class="bi bi-exclamation-triangle-fill me-1"></i> Confirm Delete
+                                                    <i class="bi bi-exclamation-triangle-fill me-1"></i> Remove Book
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                             <div class="modal-body py-3">
-                                                Are you sure you want to delete book <strong>{{ $book->title }}</strong> (ID: {{ $book->book_id }})? This action cannot be undone.
+                                                Are you sure you want to remove <strong>{{ $book->title }}</strong> (ID: #{{ $book->book_id }}) from the library catalog?
                                             </div>
                                             <div class="modal-footer border-0 pt-0">
                                                 <button type="button" class="btn btn-light rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
@@ -240,10 +246,10 @@
                     @empty
                         <tr>
                             <td colspan="6" class="text-center py-5 text-muted">
-                                <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
+                                <i class="bi bi-book fs-1 d-block mb-2 text-success opacity-50"></i>
                                 <div class="fw-semibold">No books found matching your search criteria.</div>
-                                <a href="{{ route('books.create') }}" class="btn btn-sm btn-primary mt-2 rounded-pill">
-                                    <i class="bi bi-plus-square me-1"></i> Register New Book
+                                <a href="{{ route('books.create') }}" class="btn btn-sm btn-primary mt-2 rounded-pill px-3">
+                                    <i class="bi bi-plus-circle me-1"></i> Register New Book
                                 </a>
                             </td>
                         </tr>
@@ -255,7 +261,7 @@
         <!-- Pagination & Counts -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 pt-3 border-top gap-3">
             <div class="text-secondary small">
-                Showing {{ $books->firstItem() ?? 0 }} to {{ $books->lastItem() ?? 0 }} of {{ $books->total() }} entries
+                Showing {{ $books->firstItem() ?? 0 }} to {{ $books->lastItem() ?? 0 }} of {{ $books->total() }} cataloged books
             </div>
             <div>
                 {{ $books->links('pagination::bootstrap-5') }}
@@ -264,8 +270,8 @@
 
         <!-- Back to Book Form Button -->
         <div class="d-grid mt-4">
-            <a href="{{ route('books.create') }}" class="btn btn-primary btn-lg rounded-3 fw-semibold py-2 d-flex align-items-center justify-content-center gap-2">
-                <i class="bi bi-plus-circle-fill"></i> + Back to Book Form
+            <a href="{{ route('books.create') }}" class="btn btn-primary btn-lg rounded-3 fw-bold py-2 d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-plus-circle-fill"></i> + Register New Book to Library
             </a>
         </div>
     </div>

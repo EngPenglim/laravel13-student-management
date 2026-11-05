@@ -8,10 +8,10 @@
         <div class="col-lg-8">
             <!-- Header Banner -->
             <div class="header-gradient-card text-center mb-0" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-                <div class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-25 rounded-circle p-3 mb-2">
-                    <i class="bi bi-pencil-square fs-2"></i>
+                <div class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-20 rounded-circle p-3 mb-2 shadow-sm border border-white border-opacity-25">
+                    <i class="bi bi-pencil-square fs-2 text-warning"></i>
                 </div>
-                <h3 class="fw-bold mb-1">Edit Book Details</h3>
+                <h3 class="fw-bold mb-1 brand-font text-white">Edit Book Details</h3>
                 <p class="mb-0 text-white-50">Update catalog info for Book #{{ $book->book_id }}</p>
             </div>
 
@@ -23,15 +23,15 @@
 
                     <!-- 1. Book Details Section -->
                     <div class="mb-4">
-                        <h6 class="fw-bold text-primary text-uppercase letter-spacing-1 d-flex align-items-center gap-2 mb-3">
-                            <i class="bi bi-journal-bookmark fs-5"></i> Book Information
+                        <h6 class="fw-bold text-success text-uppercase letter-spacing-1 d-flex align-items-center gap-2 mb-3">
+                            <i class="bi bi-journal-bookmark fs-5"></i> 1. Book Details
                         </h6>
 
                         <!-- Title -->
                         <div class="mb-3">
                             <label class="form-label text-secondary small fw-semibold">Book Title</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0 text-secondary">
+                                <span class="input-group-text bg-light border-end-0 text-success">
                                     <i class="bi bi-book"></i>
                                 </span>
                                 <input 
@@ -49,10 +49,10 @@
 
                         <!-- Author -->
                         <div class="mb-3">
-                            <label class="form-label text-secondary small fw-semibold">Author</label>
+                            <label class="form-label text-secondary small fw-semibold">Author / Writer</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0 text-secondary">
-                                    <i class="bi bi-person"></i>
+                                <span class="input-group-text bg-light border-end-0 text-success">
+                                    <i class="bi bi-pen"></i>
                                 </span>
                                 <input 
                                     type="text" 
@@ -71,7 +71,7 @@
                         <div class="mb-3">
                             <label class="form-label text-secondary small fw-semibold">ISBN Code</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0 text-secondary">
+                                <span class="input-group-text bg-light border-end-0 text-success">
                                     <i class="bi bi-upc-scan"></i>
                                 </span>
                                 <input 
@@ -89,16 +89,16 @@
 
                     <!-- 2. Catalog Information Section -->
                     <div class="mb-4">
-                        <h6 class="fw-bold text-primary text-uppercase letter-spacing-1 d-flex align-items-center gap-2 mb-3">
-                            <i class="bi bi-archive fs-5"></i> Catalog Information
+                        <h6 class="fw-bold text-success text-uppercase letter-spacing-1 d-flex align-items-center gap-2 mb-3">
+                            <i class="bi bi-archive fs-5"></i> 2. Catalog & Shelf Information
                         </h6>
 
                         <div class="row g-3 mb-3">
                             <!-- Published Date -->
                             <div class="col-md-6">
-                                <label class="form-label text-secondary small fw-semibold">Published Date</label>
+                                <label class="form-label text-secondary small fw-semibold">Publication Date</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0 text-secondary">
+                                    <span class="input-group-text bg-light border-end-0 text-success">
                                         <i class="bi bi-calendar3"></i>
                                     </span>
                                     <input 
@@ -118,7 +118,7 @@
                             <div class="col-md-6">
                                 <label class="form-label text-secondary small fw-semibold">Total Copies</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0 text-secondary">
+                                    <span class="input-group-text bg-light border-end-0 text-success">
                                         <i class="bi bi-stack"></i>
                                     </span>
                                     <input 
@@ -139,9 +139,9 @@
                         <div class="row g-3 mb-3">
                             <!-- Category Selection -->
                             <div class="col-md-6">
-                                <label class="form-label text-secondary small fw-semibold">Category</label>
+                                <label class="form-label text-secondary small fw-semibold">Category / Shelf</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0 text-secondary">
+                                    <span class="input-group-text bg-light border-end-0 text-success">
                                         <i class="bi bi-tag"></i>
                                     </span>
                                     <select class="form-select bg-light border-start-0 ps-0 @error('category_id') is-invalid @enderror" name="category_id" required>
@@ -161,12 +161,12 @@
                             <div class="col-md-6">
                                 <label class="form-label text-secondary small fw-semibold">Status</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0 text-secondary">
+                                    <span class="input-group-text bg-light border-end-0 text-success">
                                         <i class="bi bi-bookmark-check"></i>
                                     </span>
                                     <select class="form-select bg-light border-start-0 ps-0 @error('status') is-invalid @enderror" name="status" required>
-                                        <option value="Available" {{ old('status', $book->status) == 'Available' ? 'selected' : '' }}>Available</option>
-                                        <option value="Borrowed" {{ old('status', $book->status) == 'Borrowed' ? 'selected' : '' }}>Borrowed</option>
+                                        <option value="Available" {{ old('status', $book->status) == 'Available' ? 'selected' : '' }}>Available (On Shelf)</option>
+                                        <option value="Borrowed" {{ old('status', $book->status) == 'Borrowed' ? 'selected' : '' }}>Borrowed (Checked Out)</option>
                                         <option value="Reserved" {{ old('status', $book->status) == 'Reserved' ? 'selected' : '' }}>Reserved</option>
                                     </select>
                                     @error('status')
@@ -179,8 +179,8 @@
 
                     <!-- 3. Additional Information Section -->
                     <div class="mb-4">
-                        <h6 class="fw-bold text-primary text-uppercase letter-spacing-1 d-flex align-items-center gap-2 mb-3">
-                            <i class="bi bi-file-text fs-5"></i> Summary & Description
+                        <h6 class="fw-bold text-success text-uppercase letter-spacing-1 d-flex align-items-center gap-2 mb-3">
+                            <i class="bi bi-file-earmark-text fs-5"></i> 3. Summary & Description
                         </h6>
 
                         <div class="mb-3">
@@ -197,8 +197,8 @@
 
                     <!-- Buttons -->
                     <div class="d-flex flex-wrap gap-2 pt-2">
-                        <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold d-flex align-items-center gap-2 rounded-3 shadow-sm">
-                            <i class="bi bi-check-lg"></i> Update Book
+                        <button type="submit" class="btn btn-primary px-4 py-2 fw-bold d-flex align-items-center gap-2 rounded-3 shadow-sm">
+                            <i class="bi bi-check-lg"></i> Update Book Details
                         </button>
                         <a href="{{ route('books.index') }}" class="btn btn-outline-secondary px-4 py-2 fw-semibold d-flex align-items-center gap-2 rounded-3">
                             <i class="bi bi-x-circle"></i> Cancel

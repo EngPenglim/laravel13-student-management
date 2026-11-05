@@ -1,71 +1,89 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
+@section('title', 'Library Portal Login')
 
 @section('content')
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-5 col-lg-4">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+            <!-- Login Card with Emerald Header Accent -->
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <div class="card-body p-4 p-md-5">
-                    <h2 class="text-center fw-bold text-secondary-emphasis mb-4">Login Form</h2>
+                <!-- Top Brand Strip -->
+                <div class="p-4 text-center" style="background: linear-gradient(135deg, #064e3b, #047857); color: white;">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-20 rounded-circle p-3 mb-2 shadow-sm">
+                        <i class="bi bi-book-half fs-2 text-warning"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1 brand-font">Login Form</h3>
+                    <p class="mb-0 text-white-50 small">Library Portal &bull; Sign in to manage books</p>
+                </div>
 
+                <div class="card-body p-4 p-md-4">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <!-- Email Address -->
                         <div class="mb-3">
-                            <label for="email" class="form-label text-secondary fw-semibold small">Email address</label>
-                            <input 
-                                type="email" 
-                                class="form-control form-control-lg bg-light border-0 @error('email') is-invalid @enderror" 
-                                id="email" 
-                                name="email" 
-                                value="{{ old('email', 'librarian@gmail.com') }}" 
-                                placeholder="librarian@gmail.com" 
-                                required 
-                                autofocus
-                            >
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="email" class="form-label text-secondary fw-semibold small">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-success">
+                                    <i class="bi bi-envelope-at"></i>
+                                </span>
+                                <input 
+                                    type="email" 
+                                    class="form-control form-control-lg bg-light border-start-0 ps-0 @error('email') is-invalid @enderror" 
+                                    id="email" 
+                                    name="email" 
+                                    value="{{ old('email', 'librarian@gmail.com') }}" 
+                                    placeholder="librarian@gmail.com" 
+                                    required 
+                                    autofocus
+                                >
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <!-- Password -->
                         <div class="mb-4">
                             <label for="password" class="form-label text-secondary fw-semibold small">Password</label>
-                            <input 
-                                type="password" 
-                                class="form-control form-control-lg bg-light border-0 @error('password') is-invalid @enderror" 
-                                id="password" 
-                                name="password" 
-                                placeholder="•••••" 
-                                required
-                            >
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-success">
+                                    <i class="bi bi-shield-lock"></i>
+                                </span>
+                                <input 
+                                    type="password" 
+                                    class="form-control form-control-lg bg-light border-start-0 ps-0 @error('password') is-invalid @enderror" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="••••••••" 
+                                    required
+                                >
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <!-- Submit Button -->
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg rounded-3 fw-semibold">
-                                Login
+                            <button type="submit" class="btn btn-primary btn-lg rounded-3 fw-bold py-2">
+                                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Library
                             </button>
                         </div>
 
                         <div class="text-center text-secondary small">
                             Don't have an account? 
-                            <a href="{{ route('register') }}" class="text-primary text-decoration-none fw-semibold">Register here</a>
+                            <a href="{{ route('register') }}" class="text-success text-decoration-none fw-bold">Register as Staff</a>
                         </div>
                     </form>
                 </div>
             </div>
 
             <!-- Demo Account Credentials Helper -->
-            <div class="card border-0 bg-white shadow-sm rounded-3 mt-3">
+            <div class="card border-0 bg-white shadow-sm rounded-3 mt-3 border-start border-4 border-success">
                 <div class="card-body p-3 text-center small text-muted">
-                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle me-1">Demo Account</span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle me-1">Demo Librarian</span>
                     Email: <strong>librarian@gmail.com</strong> | Password: <strong>password</strong>
                 </div>
             </div>
