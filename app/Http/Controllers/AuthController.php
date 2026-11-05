@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function showLogin()
     {
         if (Auth::check()) {
-            return redirect()->route('students.index');
+            return redirect()->route('books.index');
         }
         return view('login');
     }
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('students.index'))
+            return redirect()->intended(route('books.index'))
                 ->with('success', 'Welcome back, ' . Auth::user()->name . '!');
         }
 
@@ -49,7 +49,7 @@ class AuthController extends Controller
     public function showRegister()
     {
         if (Auth::check()) {
-            return redirect()->route('students.index');
+            return redirect()->route('books.index');
         }
         return view('register');
     }
@@ -74,8 +74,8 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('students.index')
-            ->with('success', 'Account registered successfully! Welcome to the system.');
+        return redirect()->route('books.index')
+            ->with('success', 'Account registered successfully! Welcome to the Library System.');
     }
 
     /**

@@ -1,19 +1,19 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routes - Library Management System
 |--------------------------------------------------------------------------
 */
 
-// Home redirects to students directory or login
+// Home redirects to library book directory or login
 Route::get('/', function () {
-    return redirect()->route('students.index');
+    return redirect()->route('books.index');
 });
 
 // Authentication Routes (Guest)
@@ -29,9 +29,9 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Students Resource CRUD (Index, Create, Store, Show, Edit, Update, Destroy)
-    Route::resource('students', StudentController::class);
+    // Books Resource CRUD (Index, Create, Store, Show, Edit, Update, Destroy)
+    Route::resource('books', BookController::class);
 
-    // Departments Management CRUD
-    Route::resource('departments', DepartmentController::class)->except(['create', 'show', 'edit']);
+    // Categories Resource CRUD
+    Route::resource('categories', CategoryController::class)->except(['create', 'show', 'edit']);
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Student Management System') - Laravel 13</title>
+    <title>@yield('title', 'Library Management System') - Laravel 13</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -64,7 +64,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
-        .dept-badge {
+        .category-badge {
             background: #eff6ff;
             color: #2563eb;
             border: 1px solid #dbeafe;
@@ -129,9 +129,9 @@
     <!-- Top Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="{{ route('students.index') }}">
-                <span class="navbar-brand-badge"><i class="bi bi-mortarboard-fill me-1"></i> SMS</span>
-                <span>Student Management System</span>
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="{{ route('books.index') }}">
+                <span class="navbar-brand-badge"><i class="bi bi-book-half me-1"></i> LMS</span>
+                <span>Library Management System</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav">
                 <span class="navbar-toggler-icon"></span>
@@ -139,18 +139,18 @@
             <div class="collapse navbar-collapse" id="topNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('students.index') ? 'fw-bold text-primary active' : '' }}" href="{{ route('students.index') }}">
-                            <i class="bi bi-people me-1"></i> Student Directory
+                        <a class="nav-link {{ request()->routeIs('books.index') ? 'fw-bold text-primary active' : '' }}" href="{{ route('books.index') }}">
+                            <i class="bi bi-journal-bookmark me-1"></i> Book Directory
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('students.create') ? 'fw-bold text-primary active' : '' }}" href="{{ route('students.create') }}">
-                            <i class="bi bi-person-plus me-1"></i> Register Student
+                        <a class="nav-link {{ request()->routeIs('books.create') ? 'fw-bold text-primary active' : '' }}" href="{{ route('books.create') }}">
+                            <i class="bi bi-plus-square me-1"></i> Register Book
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('departments.*') ? 'fw-bold text-primary active' : '' }}" href="{{ route('departments.index') }}">
-                            <i class="bi bi-building me-1"></i> Departments
+                        <a class="nav-link {{ request()->routeIs('categories.*') ? 'fw-bold text-primary active' : '' }}" href="{{ route('categories.index') }}">
+                            <i class="bi bi-tags me-1"></i> Categories
                         </a>
                     </li>
                 </ul>
@@ -212,7 +212,7 @@
     <footer class="footer-note">
         <div class="container">
             <p class="mb-1 fw-semibold">SETIC Final Project Exam &bull; Laravel 13 Framework</p>
-            <p class="mb-0 text-muted">Relational Database &bull; Auth &bull; Filter & Search &bull; CRUD Operations</p>
+            <p class="mb-0 text-muted">Library Management System &bull; Relational Database &bull; Auth &bull; Filter & Search &bull; CRUD</p>
         </div>
     </footer>
 

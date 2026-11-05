@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->id('dept_id');
-            $table->string('dept_name');
-            $table->unsignedBigInteger('manager_id')->nullable();
-            $table->unsignedBigInteger('location_id')->nullable();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id('category_id');
+            $table->string('category_name');
+            $table->string('shelf_location')->nullable();
+            $table->unsignedInteger('floor_no')->default(1);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('categories');
     }
 };

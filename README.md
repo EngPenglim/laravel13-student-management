@@ -1,6 +1,6 @@
-# Student Management System - Final Project Exam (Laravel 13)
+# Library Management System - Final Project Exam (Laravel 13)
 
-A complete **Student Management System** developed in **Laravel 13** according to the SETIC Final Exam requirements.
+A complete **Library Management System** developed in **Laravel 13** according to the SETIC Final Exam requirements (Topic #3 from the exam topics list).
 
 ---
 
@@ -8,99 +8,83 @@ A complete **Student Management System** developed in **Laravel 13** according t
 
 | No | Requirement | Implementation Status | Notes |
 |:---|:---|:---:|:---|
-| 1 | **Laravel Login & Register Form** | ✅ Complete | Centered UI matching slides (`views/login.blade.php`, `views/register.blade.php`) |
-| 2 | **Migration Relationship Tables & Model Connection** | ✅ Complete | `departments` (PK: `dept_id`) 1:N `students` (FK: `department_id`) with Eloquent relationships |
-| 3 | **Database Seeding** | ✅ Complete | Seeds exact sample data from exam slides (4 students, 3 departments, demo admin) |
-| 4 | **CRUD Operations System** | ✅ Complete | Create, Read, Update, Delete for Students & Departments |
-| 5 | **Search & Filtering** | ✅ Complete | Search by name/email/dept; Filter by Department; Filter by Gender; Sorting |
-| 6 | **HTML Table & Directory UI** | ✅ Complete | Exact layout from slide 7 with stats counters, badges, and action buttons |
+| 1 | **Laravel Login & Register Form** | ✅ Complete | Clean centered UI (`views/login.blade.php`, `views/register.blade.php`) matching slide designs |
+| 2 | **Migration Relationship Tables & Model Connection** | ✅ Complete | `categories` (PK: `category_id`) 1:N `books` (FK: `category_id`) with full Eloquent relations |
+| 3 | **Database Seeding** | ✅ Complete | Seeds realistic academic & CS books, categories, and librarian user account |
+| 4 | **CRUD Operations System** | ✅ Complete | Create, Read, Update, Delete for Books & Categories |
+| 5 | **Search & Filtering** | ✅ Complete | Live search by title/author/ISBN/category; Filter by category & status; Sorting |
+| 6 | **HTML Table & Directory UI** | ✅ Complete | Gradient header, 3 glass stat cards, badges, and action buttons |
 | 7 | **GitHub & Submission Package** | ✅ Complete | Ready for Git repository push & submission zip file |
 
 ---
 
 ## 🗄️ Database Schema & Relational Design
 
-### 1. `departments` Table
-* `dept_id` (BIGINT UNSIGNED, Primary Key, Auto Increment)
-* `dept_name` (VARCHAR(255))
-* `manager_id` (BIGINT UNSIGNED, Nullable)
-* `location_id` (BIGINT UNSIGNED, Nullable)
+### 1. `categories` Table
+* `category_id` (BIGINT UNSIGNED, Primary Key, Auto Increment)
+* `category_name` (VARCHAR(255))
+* `shelf_location` (VARCHAR(100), Nullable - e.g. "Shelf CS-1")
+* `floor_no` (INT UNSIGNED, Default: 1)
 * `created_at`, `updated_at` (Timestamps)
 
-### 2. `students` Table
-* `student_id` (BIGINT UNSIGNED, Primary Key, Auto Increment)
-* `student_name` (VARCHAR(255))
-* `email` (VARCHAR(255))
-* `gender` (VARCHAR(20) - 'Male', 'Female', 'Other')
-* `dob` (DATE, Nullable)
-* `enrollment` (VARCHAR(100), Nullable - e.g. "3.905874077043 years")
-* `enrollment_date` (DATE)
+### 2. `books` Table
+* `book_id` (BIGINT UNSIGNED, Primary Key, Auto Increment)
+* `title` (VARCHAR(255))
+* `author` (VARCHAR(255))
+* `isbn` (VARCHAR(50), Nullable - e.g. "978-0132350884")
+* `published_date` (DATE)
+* `status` (VARCHAR(30) - 'Available', 'Borrowed', 'Reserved')
+* `copies` (INT UNSIGNED, Default: 1)
 * `description` (TEXT, Nullable)
-* `department_id` (BIGINT UNSIGNED, Foreign Key -> `departments.dept_id`, Cascade on Delete)
+* `category_id` (BIGINT UNSIGNED, Foreign Key -> `categories.category_id`, Cascade on Delete)
 * `created_at`, `updated_at` (Timestamps)
 
 ---
 
-## 👥 Seed Data (Matching Exam Slides 7 & 8)
+## 👥 Seed Data & Default Logins
 
-### Default Admin Credentials:
-* **Email:** `adminwoman@gmail.com`
+### Default Credentials:
+* **Librarian Email:** `librarian@gmail.com`
+* **Admin Email:** `adminwoman@gmail.com`
 * **Password:** `password`
 
-### Departments:
-1. `Management Information System` (Manager ID: 101, Location ID: 1)
-2. `Design` (Manager ID: 102, Location ID: 2)
-3. `Computer Science` (Manager ID: 103, Location ID: 3)
+### Categories:
+1. `Computer Science` (Shelf: `Shelf CS-1`, Floor: 2)
+2. `Software Engineering` (Shelf: `Shelf SE-2`, Floor: 2)
+3. `Database & Cloud Systems` (Shelf: `Shelf DB-3`, Floor: 3)
+4. `General Literature & Research` (Shelf: `Shelf GL-1`, Floor: 1)
 
-### Students:
-1. **Kong Sopheak** - `kongsopheak@gmail.com` - Male - Enrolled: `2022-01-01` - Department: `Management Information System`
-2. **Ly Chhailin** - `lin@gmail.com` - Female - Enrolled: `2022-01-01` - Department: `Design`
-3. **Pov Nita** - `povnita@gmail.com` - Female - Enrolled: `2023-04-11` - Department: `Management Information System` (Note: `OK`)
-4. **Leng Makara** - `lengmakara@gmail.com` - Male - Enrolled: `2024-11-01` - Department: `Design`
+### Sample Books:
+1. **Clean Code: A Handbook of Agile Software Craftsmanship** – Robert C. Martin – Status: `Available`
+2. **Design Patterns: Elements of Reusable Object-Oriented Software** – Gang of Four – Status: `Available`
+3. **Database System Concepts** – Abraham Silberschatz & Henry Korth – Status: `Borrowed`
+4. **Laravel: Up & Running** – Matt Stauffer – Status: `Available`
+5. **The Pragmatic Programmer** – Andrew Hunt & David Thomas – Status: `Reserved`
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Prerequisites
-* PHP >= 8.2 (PHP 8.3 recommended)
-* Composer
-* SQLite or MySQL
-
-### 2. Setup Project
 ```bash
-# Clone the repository
-git clone <your-repository-url>
-cd Web_final
-
-# Install dependencies (if not already installed)
-composer install
-
-# Environment setup
-cp .env.example .env
-php artisan key:generate
-
-# Run Migrations and Seed Data
-php artisan migrate:fresh --seed
-
-# Start the Development Server
+# 1. Start the Laravel development server
 php artisan serve
-```
 
-Access the application in your web browser at:
-`http://127.0.0.1:8000`
+# 2. Access in your browser:
+http://127.0.0.1:8000
+```
 
 ---
 
-## 🧪 Running Automated Tests
+## 🧪 Automated Tests
 
+Run the test suite:
 ```bash
 php artisan test
 ```
-All 10 feature & unit test assertions pass covering authentication, models, relationships, CRUD, search, and filtering.
+All 10 tests pass covering Authentication, Model Relationships, Book CRUD, Search, and Filtering.
 
 ---
 
-## 📁 MySQL / dbForge Studio Import (Optional)
-A ready-to-run SQL script matching slide 8 is available at:
-`database/laravel_exam_dump.sql`
+## 📁 MySQL / dbForge Studio Import
+A ready-to-run SQL script is available at:
+`database/library_management_dump.sql`

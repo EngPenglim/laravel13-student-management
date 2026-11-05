@@ -21,8 +21,8 @@
                                 class="form-control form-control-lg bg-light border-0 @error('email') is-invalid @enderror" 
                                 id="email" 
                                 name="email" 
-                                value="{{ old('email', 'adminwoman@gmail.com') }}" 
-                                placeholder="adminwoman@gmail.com" 
+                                value="{{ old('email', 'librarian@gmail.com') }}" 
+                                placeholder="librarian@gmail.com" 
                                 required 
                                 autofocus
                             >
@@ -62,11 +62,11 @@
                 </div>
             </div>
 
-            <!-- Quick Demo Credentials helper box -->
+            <!-- Demo Account Credentials Helper -->
             <div class="card border-0 bg-white shadow-sm rounded-3 mt-3">
                 <div class="card-body p-3 text-center small text-muted">
                     <span class="badge bg-primary-subtle text-primary border border-primary-subtle me-1">Demo Account</span>
-                    Email: <strong>adminwoman@gmail.com</strong> | Password: <strong>password</strong>
+                    Email: <strong>librarian@gmail.com</strong> | Password: <strong>password</strong>
                 </div>
             </div>
         </div>
